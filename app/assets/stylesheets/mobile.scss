@@ -1,0 +1,28 @@
+@media (max-width: 991px) {
+  .modal-dialog {
+    max-width: none;
+  }
+  .container {
+    max-width: 100%;
+  }
+  body {
+    font-size: 25px;
+  }
+  .btn {
+    font-size: inherit;
+  }
+  .inside {
+    margin-top: 200px;
+  }
+  .input-submit {
+    button {
+      font-size: 25px;
+    }
+  }
+  .notification-container {
+    margin-top: 100px;
+  }
+  .dark i {
+    margin-right: 1rem;
+  }
+}

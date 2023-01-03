@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CurrencyEsbuild</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+
+  <body>
+    <%= render 'layouts/nav'%>
+    <%= yield %>
+    <% if current_user&.cashier? %>
+      <div id="cashier_acknowledgment">
+        <% if current_user&.has_acknowlegments? %>
+          <div id="<%= current_user.acknowledgment_type %>_acknowledgment" class="modal show fade in acknowledgments" tabindex="-1" role="dialog" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <% if current_user.acknowledgment_type == 'collection' %>
+                    <h5 class="modal-title">Увага! Касу було проінкасовано!</h5>
+                  <% elsif current_user.acknowledgment_type == 'replenishment' %>
+                    <h5 class="modal-title">Увага! Касу було поповнено!</h5>
+                  <% else %>
+                    <h5 class="modal-title">Увага! Курс валют було змінено!</h5>
+                  <% end %>
+                </div>
+                <div class="modal-body">
+                  <p>Натисніть на кнопку "Зрозуміло" та подивіться на оновлену інформацію</p>
+                </div>
+                <div class="modal-footer">
+                  <%= form_for current_user, :url => {:controller => "users", :action => "submit_acknowledgment"} do |f| %>
+                    <%= f.hidden_field :acknowledgment_type, value: current_user.acknowledgment_type %>
+                    <%= f.submit 'Зрозуміло', class: "btn btn-primary"  %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </body>
+</html>
