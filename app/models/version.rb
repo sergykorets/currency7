@@ -3,6 +3,6 @@ class Version < PaperTrail::Version
 
   def acknowledge_cashiers
     User.cashier.update_all(new_rates_acknowleged: false)
-    ActionCable.server.broadcast 'web_notifications_channel', {message: 'new_rates'}
+    #ActionCable.server.broadcast 'web_notifications_channel', {message: 'new_rates'}
   end
 end

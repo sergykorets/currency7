@@ -92,8 +92,7 @@ class CurrenciesController < ApplicationController
     rates = params[:rates]
     rates.keys.each do |rate|
       unless Currency.find(rate).update(buy_price: rates[rate][:buy_amount], sell_price: rates[rate][:sell_amount])
-        render json: { success: false, error: 'Ціна продажу має бути більшою за купівлю'}
-        return
+        render json: { success: false, error: 'Ціна продажу має бути більшою за купівлю'} and return
       end
     end
     render json: { success: true,
