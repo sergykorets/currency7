@@ -241,45 +241,95 @@ const Currencies = (props) => {
     });
   }
 
+  console.log('state', state)
+
   return (
     <Fragment>
       { state.loaded &&
       <Fragment>
         <div className="container inside">
-          <div className="input-submit">
+          <div className="d-flex" style={{alignItems: 'center', justifyContent: 'space-between'}}>
             { JSON.parse(props.admin) &&
             <Fragment>
-              <button className='btn-success' onClick={() => setState({...state, cashDeskModal: true})}>Дії з касою</button>
-              <button className='btn-primary' onClick={() => setState({...state, ratesModal: true})}>Зміна курсу валют</button>
+              <button className='btn btn-success m-1' onClick={() => setState({...state, cashDeskModal: true})}>Дії з касою</button>
+              <button className='btn btn-primary m-1' onClick={() => setState({...state, ratesModal: true})}>Зміна курсу валют</button>
             </Fragment>}
-            <button className='btn-danger' onClick={() => setState({...state, exchangeModal: true})}>Обмін валюти</button>
+            <button className='btn btn-danger m-1' onClick={() => setState({...state, exchangeModal: true})}>Обмін валюти</button>
           </div>
-          <table className='dark' style={{marginTop: 20 + 'px'}}>
-            <thead>
-            <tr>
-              <th><h1>Валюта</h1></th>
-              <th><h1>Купівля</h1></th>
-              <th><h1>Продаж</h1></th>
-              <th><h1>Куплено</h1></th>
-              <th><h1>Продано</h1></th>
-              <th><h1>Каса</h1></th>
-            </tr>
-            </thead>
-            <tbody>
-            { Object.values(state.currencies).map((currency) => {
-              return (
-                <tr key={currency.id}>
-                  <td><img className='currency-icon' src={`/images/${currency.name}.svg`}/>{currency.name}</td>
-                  <td>{currency.buy || '-'}</td>
-                  <td>{currency.sell || '-'}</td>
-                  <td>{currency.bought_today}</td>
-                  <td>{currency.sold_today}</td>
-                  <td>{currency.total_amount}</td>
-                </tr>
-              )
-            })}
-            </tbody>
-          </table>
+          <div className='row currency-header mt-3'>
+            <div className='col-2 text-center currency-header-row'>
+              <p>Валюта</p>
+            </div>
+            <div className='col-2 text-center currency-header-row'>
+              <p>Купівля</p>
+            </div>
+            <div className='col-2 text-center currency-header-row'>
+              <p>Продаж</p>
+            </div>
+            <div className='col-2 text-center currency-header-row'>
+              <p>Куплено</p>
+            </div>
+            <div className='col-2 text-center currency-header-row'>
+              <p>Продано</p>
+            </div>
+            <div className='col-2 text-center currency-header-row'>
+              <p>Каса</p>
+            </div>
+          </div>
+          { Object.values(state.currencies).map((currency, i) =>
+            <Fragment key={i}>
+              <div className='row currency-rows'>
+                <div className='col-2 currency-row text-center'>
+                  <img className='currency-icon' src={`/images/${currency.name}.svg`}/>
+                  {currency.name}
+                </div>
+                <div className='col-2 currency-row text-center d-flex'>
+                  {currency.buy || '-'}
+                </div>
+                <div className='col-2 currency-row text-center d-flex'>
+                  {currency.sell || '-'}
+                </div>
+                <div className='col-2 currency-row text-center d-flex'>
+                  {currency.bought_today}
+                </div>
+                <div className='col-2 currency-row text-center d-flex'>
+                  {currency.sold_today}
+                </div>
+                <div className='col-2 currency-row text-center d-flex'>
+                  {currency.total_amount}
+                </div>
+              </div>
+            </Fragment>)}
+          {/*<div className='row'>*/}
+          {/*  <div className='col-12'>*/}
+          {/*    <table className='dark' style={{marginTop: 20 + 'px'}}>*/}
+          {/*      <thead>*/}
+          {/*      <tr>*/}
+          {/*        <th>-</th>*/}
+          {/*        <th>Куп</th>*/}
+          {/*        <th>Прод</th>*/}
+          {/*        <th>Куплено</th>*/}
+          {/*        <th>Продано</th>*/}
+          {/*        <th>Каса</th>*/}
+          {/*      </tr>*/}
+          {/*      </thead>*/}
+          {/*      <tbody>*/}
+          {/*      { Object.values(state.currencies).map((currency) => {*/}
+          {/*        return (*/}
+          {/*          <tr key={currency.id}>*/}
+          {/*            <td><img className='currency-icon' src={`/images/${currency.name}.svg`}/>{currency.name}</td>*/}
+          {/*            <td>{currency.buy || '-'}</td>*/}
+          {/*            <td>{currency.sell || '-'}</td>*/}
+          {/*            <td>{currency.bought_today}</td>*/}
+          {/*            <td>{currency.sold_today}</td>*/}
+          {/*            <td>{currency.total_amount}</td>*/}
+          {/*          </tr>*/}
+          {/*        )*/}
+          {/*      })}*/}
+          {/*      </tbody>*/}
+          {/*    </table>*/}
+          {/*  </div>*/}
+          {/*</div>*/}
         </div>
 
         <Modal isOpen={state.cashDeskModal} toggle={() => handleModal('cashDeskModal')} size="lg">
@@ -385,32 +435,33 @@ const Currencies = (props) => {
         <Modal isOpen={state.ratesModal} toggle={() => handleModal('ratesModal')} size="lg">
           <div className='container'>
             <ModalHeader>Зміна курсу валют</ModalHeader>
-            <FormGroup>
-              <table className='table' style={{marginTop: 20 + 'px'}}>
-                <thead>
-                <tr>
-                  <th><h1>Валюта</h1></th>
-                  <th><h1>Купівля</h1></th>
-                  <th><h1>Продаж</h1></th>
-                </tr>
-                </thead>
-                <tbody>
-                { Object.values(state.currencies).map((currency) => {
-                  return (
-                    <Fragment>
-                      { currency.name !== 'UAH' &&
-                      <tr key={currency.id}>
-                        <td><img className='currency-icon' src={`/images/${currency.name}.svg`}/>{currency.name}</td>
-                        <td><Input type='number' id={`buy_amount_${currency.id}`} value={state.rates[currency.id].buy_amount} onChange={(e) => handleRatesChange(currency.id, 'buy_amount', e.target.value)}/></td>
-                        <td><Input type='number' id={`sell_amount_${currency.id}`} value={state.rates[currency.id].sell_amount} onChange={(e) => handleRatesChange(currency.id, 'sell_amount',  e.target.value)}/></td>
-                      </tr>}
-                    </Fragment>
-                  )
-                })}
-                </tbody>
-              </table>
-            </FormGroup>
-            <FormGroup>
+              <div className='row'>
+                <div className='col-4'>
+                  <h4>Валюта</h4>
+                </div>
+                <div className='col-4'>
+                  <h4>Купівля</h4>
+                </div>
+                <div className='col-4'>
+                  <h4>Продаж</h4>
+                </div>
+              </div>
+              { Object.values(state.currencies).map((currency, i) =>
+                <Fragment key={i}>
+                  { currency.name !== 'UAH' &&
+                    <div className='row mt-2'>
+                      <div className='col-4'>
+                        <img className='currency-icon' src={`/images/${currency.name}.svg`}/>{currency.name}
+                      </div>
+                      <div className='col-4'>
+                        <Input type='number' id={`buy_amount_${currency.id}`} value={state.rates[currency.id].buy_amount} onChange={(e) => handleRatesChange(currency.id, 'buy_amount', e.target.value)}/>
+                      </div>
+                      <div className='col-4'>
+                        <Input type='number' id={`sell_amount_${currency.id}`} value={state.rates[currency.id].sell_amount} onChange={(e) => handleRatesChange(currency.id, 'sell_amount',  e.target.value)}/>
+                      </div>
+                    </div>}
+                </Fragment>)}
+            <FormGroup className="mt-3">
               <ButtonToggle color="secondary" onClick={() => handleModal('ratesModal')}>Відміна</ButtonToggle>
               <ButtonToggle color="success" onClick={submitRates}>Зберегти</ButtonToggle>
             </FormGroup>

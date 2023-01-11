@@ -15,7 +15,7 @@ class TransactionsController < ApplicationController
                           rate: action.rate,
                           comment: action.comment,
                           is_canceled: action.canceled,
-                          created_at: action.created_at.strftime('%d.%m.%Y %H:%M')}
+                          created_at: action.created_at.strftime('%d.%m.%y %H:%M')}
     }
     @todays_transactions_count = actions.where('created_at >= ?', Date.today.beginning_of_day).count
     @admin = current_user&.admin?

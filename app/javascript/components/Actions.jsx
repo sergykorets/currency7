@@ -31,10 +31,10 @@ const Actions = (props) => {
         <table className='dark' style={{marginTop: 20 + 'px'}}>
           <thead>
           <tr>
-            <th><h1>Тип</h1></th>
-            <th><h1>Валюта</h1></th>
-            <th><h1>Сума</h1></th>
-            <th><h1>Дата</h1></th>
+            <th>Тип</th>
+            <th>Валюта</th>
+            <th>Сума</th>
+            <th>Дата</th>
           </tr>
           </thead>
           <tbody>
@@ -56,7 +56,7 @@ const Actions = (props) => {
             activePage={state.activePage}
             itemsCountPerPage={10}
             totalItemsCount={state.count}
-            pageRangeDisplayed={9}
+            pageRangeDisplayed={4}
             onChange={handlePageChange}
           />
           <hr/>

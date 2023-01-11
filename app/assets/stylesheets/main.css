@@ -257,16 +257,18 @@
 .blue { color: #185875; }
 .yellow { color: #FFF842; }
 
-.dark th h1 {
+.dark th {
     font-weight: bold;
     font-size: 1em;
-    text-align: left;
-    color: #185875;
+    text-align: center;
+    color: white;
+    width: 30px;
 }
 
 .dark td {
-    font-weight: normal;
+    font-weight: bold;
     font-size: 1em;
+    text-align: center;
     -webkit-box-shadow: 0 2px 2px -2px #0E1119;
     -moz-box-shadow: 0 2px 2px -2px #0E1119;
     box-shadow: 0 2px 2px -2px #0E1119;
@@ -290,21 +292,73 @@
 .dark td, table th {
     padding-bottom: 2%;
     padding-top: 2%;
-    padding-left:2%;
+    padding-left: 2%;
+    padding-right: 2%;
 }
 
 /* Background-color of the odd rows */
 .dark tr:nth-child(odd) {
     background-color: #323C50;
 }
-
-/* Background-color of the even rows */
 .dark tr:nth-child(even) {
     background-color: #2C3446;
 }
 
-.dark th {
+.dark td:nth-child(odd) {
+    color: white;
+}
+
+.dark td:nth-child(even) {
+    color: navajowhite;
+}
+
+.dark th:nth-child(odd) {
+    color: white;
+}
+
+.dark th:nth-child(even) {
+    color: navajowhite;
+}
+
+/* Background-color of the even rows */
+.currency-rows .currency-row:nth-child(even) {
+    background-color: #2C3446;
+    color: navajowhite
+}
+.currency-rows .currency-row:nth-child(odd) {
+    background-color: #323C50;
+    color: white;
+}
+
+.currency-header {
     background-color: #1F2739;
+    color: white;
+}
+
+.currency-header-row {
+    padding: 0 2px;
+}
+
+.currency-rows {
+    position: relative;
+}
+.currency-row {
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-top: 1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.row .actions-cell:nth-child(even) {
+    color: navajowhite
+}
+.row .actions-cell:nth-child(odd) {
+    color: white;
+}
+.actions-cell {
+    padding: 0 5px;
 }
 
 .dark td:first-child { color: #FB667A; }
