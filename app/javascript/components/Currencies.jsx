@@ -300,36 +300,6 @@ const Currencies = (props) => {
                 </div>
               </div>
             </Fragment>)}
-          {/*<div className='row'>*/}
-          {/*  <div className='col-12'>*/}
-          {/*    <table className='dark' style={{marginTop: 20 + 'px'}}>*/}
-          {/*      <thead>*/}
-          {/*      <tr>*/}
-          {/*        <th>-</th>*/}
-          {/*        <th>Куп</th>*/}
-          {/*        <th>Прод</th>*/}
-          {/*        <th>Куплено</th>*/}
-          {/*        <th>Продано</th>*/}
-          {/*        <th>Каса</th>*/}
-          {/*      </tr>*/}
-          {/*      </thead>*/}
-          {/*      <tbody>*/}
-          {/*      { Object.values(state.currencies).map((currency) => {*/}
-          {/*        return (*/}
-          {/*          <tr key={currency.id}>*/}
-          {/*            <td><img className='currency-icon' src={`/images/${currency.name}.svg`}/>{currency.name}</td>*/}
-          {/*            <td>{currency.buy || '-'}</td>*/}
-          {/*            <td>{currency.sell || '-'}</td>*/}
-          {/*            <td>{currency.bought_today}</td>*/}
-          {/*            <td>{currency.sold_today}</td>*/}
-          {/*            <td>{currency.total_amount}</td>*/}
-          {/*          </tr>*/}
-          {/*        )*/}
-          {/*      })}*/}
-          {/*      </tbody>*/}
-          {/*    </table>*/}
-          {/*  </div>*/}
-          {/*</div>*/}
         </div>
 
         <Modal isOpen={state.cashDeskModal} toggle={() => handleModal('cashDeskModal')} size="lg">
@@ -394,9 +364,9 @@ const Currencies = (props) => {
                   <Input type="select" name="currency" id="currency" defaultValue={state.exchange.currency_id} onChange={(e) => handleChangeCurrency(e.target.value)}>
                     { Object.values(state.currencies).map((currency) => {
                       return (
-                        <Fragment>
+                        <Fragment key={currency.id}>
                           { currency.name !== 'UAH' &&
-                          <option key={currency.id} value={currency.id}>{currency.name}</option>}
+                          <option value={currency.id}>{currency.name}</option>}
                         </Fragment>)
                     })}
                   </Input>

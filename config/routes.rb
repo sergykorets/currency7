@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root 'currencies#index'
+  mount ActionCable.server => '/cable'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_scope :user do
     # Redirests signing out users back to sign-in
