@@ -1,6 +1,6 @@
-class RateChannel < ApplicationCable::Channel
+class ChangeRateChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "rate_channel"
+    stream_from "change_rate_channel"
   end
 
   def unsubscribed
