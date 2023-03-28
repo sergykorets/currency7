@@ -3,7 +3,7 @@ import React from "react"
 import { createRoot } from "react-dom/client"
 import Acknowledgment from '../components/Acknowledgment'
 
-consumer.subscriptions.create("RateChannel", {
+consumer.subscriptions.create("SharmChannel", {
   connected() {
     // Called when the subscription is ready for use on the server
   },
